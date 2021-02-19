@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.PneumatiqueConstants;
@@ -49,8 +52,6 @@ public class RobotContainer {
     //configuration des commandes par defaut
     setDefaultCommands();
 
-    // Configure de la correspondance entre les boutons et les commandes
-    configureButtonBindings();
   }
 
   /**
@@ -62,9 +63,15 @@ public class RobotContainer {
 
    //Definition des commandes par default de chaque sous-systeme
   private void setDefaultCommands() {
-    m_drivetrain.setDefaultCommand(new ArcadeDriveCommand(()->m_pilot.getY(), ()->m_pilot.getX(), m_drivetrain));
+    m_drivetrain.setDefaultCommand(new ArcadeDriveCommand(
+      ()->m_pilot.getY(), ()->m_pilot.getX(), m_drivetrain)
+      );
     m_mecanisme2.setDefaultCommand(new Meca2ReposCommand(m_mecanisme2));
-    
+
+    // Configure de la correspondance entre les boutons et les commandes
+    configureButtonBindings();
+    // Affichage du sous-systeme en fonction au Shuffleboard
+    SmartDashboard.putData(m_drivetrain);
   }
 
   // Correspondance entre les boutons de la manette et les commandes
@@ -83,8 +90,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  //public Command getAutonomousCommand() {
+ public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    return null;
     
- // }
+  }
 }

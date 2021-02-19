@@ -5,7 +5,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.playingwithfusion.CANVenom;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -28,8 +33,8 @@ public class Drivetrain extends SubsystemBase  {
    * Commenter ici mais a activer lorsque vous aurez des moteurs Venom
    */
    
-  private final CANVenom m_leftMotor = new CANVenom(DriveConstants.kleftport); 
-  private final CANVenom m_rightMotor = new CANVenom(DriveConstants.krightport);
+  private final SpeedController m_leftMotor = new CANVenom(DriveConstants.kleftport); 
+  private final SpeedController m_rightMotor = new CANVenom(DriveConstants.krightport);
   private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_leftMotor, m_rightMotor);
   
 
@@ -42,34 +47,35 @@ public class Drivetrain extends SubsystemBase  {
    * Pour chaque côté du robot, on déclare individuellement les moteurs avant et arrière
    * Ici le côté droit
    */
-  //private final VictorSPX m_avantDroit = new VictorSPX(deviceNumber);
-  //private final VictorSPX m_arriereDroit = new VictorSPX(deviceNumber);
+  ///private final SpeedController m_avantDroit = new PWMVictorSPX(DriveConstants.kavantDroit);
+  ///private final SpeedController m_arriereDroit = new PWMVictorSPX(DriveConstants.karriereDroit);
 
   /**
    * On regroupe ensuite les deux moteurs de chaque côté du robot dans un objet SpeeControllerGroup
    * Ici le côté droit
    */
-  //private SpeedControllerGroup m_groupeMoteursdroits = new SpeedControllerGroup(m_avantDroit, m_arriereDroit);
+  ///private SpeedControllerGroup m_groupeMoteursdroits = new SpeedControllerGroup(m_avantDroit, m_arriereDroit);
 
   /**
    * Pour chaque côté du robot, on déclare individuellement les moteurs avant et arrière
    * Ici le côté gauche
    */
-  // private final VictorSPX m_avantGauche = new VictorSPX(deviceNumber);
-  //private final VictorSPX m_arriereGauche = new VictorSPX(deviceNumber);
+  ///private final SpeedController m_avantGauche = new PWMVictorSPX(DriveConstants.kavantGauche);
+  ///private final SpeedController m_arriereGauche = new PWMVictorSPX(DriveConstants.karriereGauche);
 
   /**
    * On regroupe ensuite les deux moteurs de chaque côté du robot dans un objet SpeeControllerGroup
    * Ici le côté gauche
    */
-  //private SpeedControllerGroup m_groupeMoteursgauches = new SpeedControllerGroup(m_avantGauche, m_arriereGauche);
+  ///private SpeedControllerGroup m_groupeMoteursgauches = new SpeedControllerGroup(m_avantGauche, m_arriereGauche);
 
   /**
    * On regroupe finalement ces deux groupes de moteurs dans un objet DifferentialDrive qui 
    * implemente l'entraînement différentiel
    */
 
-  //private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_groupeMoteursgauches, m_groupeMoteursdroits);
+  ///private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_groupeMoteursgauches, m_groupeMoteursdroits);
+  
 
   //Creation d'un objet Drivetrain 
   public Drivetrain() {
@@ -90,7 +96,7 @@ public class Drivetrain extends SubsystemBase  {
    * @param ptourne       pour tourner gauche ou droire [-1,1]
    */
   public void arcadeDrive(double pavanceRecule, double ptourne){
-    m_drivetrain.arcadeDrive(pavanceRecule, pavanceRecule);
+    m_drivetrain.arcadeDrive(pavanceRecule, ptourne);
   }
 
 }
