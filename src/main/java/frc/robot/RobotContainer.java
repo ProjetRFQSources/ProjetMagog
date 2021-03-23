@@ -16,7 +16,11 @@ import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.PneumatiqueConstants;
 import frc.robot.commands.AntiHoraireCommand;
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.ExtensionCommand;
+import frc.robot.commands.ExtensionCommand2;
 import frc.robot.commands.Meca2ReposCommand;
+import frc.robot.commands.RetractionCommand;
+import frc.robot.commands.RetractionCommand2;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Mecanisme2;
 
@@ -33,11 +37,11 @@ public class RobotContainer {
   private final Mecanisme2 m_mecanisme2 = new Mecanisme2();
 
   //Declaration et definition de la manette
-  private final Joystick m_pilot = new Joystick(IOConstants.KmanettePort);
+  private final XboxController m_pilot = new XboxController(IOConstants.KmanettePort);
 
   //Declaration et definition du compressor
   private final Compressor m_compressor = new Compressor(PneumatiqueConstants.kcompressor);
-
+  //m_compressor.start();
   // private final ExampleCommand m_autoCommand = new
   // ExampleCommand(m_exampleSubsystem);
 
@@ -64,7 +68,7 @@ public class RobotContainer {
    //Definition des commandes par default de chaque sous-systeme
   private void setDefaultCommands() {
     m_drivetrain.setDefaultCommand(new ArcadeDriveCommand(
-      ()->m_pilot.getY(), ()->m_pilot.getX(), m_drivetrain)
+      ()->m_pilot.getRawAxis(1), ()->m_pilot.getRawAxis(5), m_drivetrain)
       );
     m_mecanisme2.setDefaultCommand(new Meca2ReposCommand(m_mecanisme2));
 
@@ -82,6 +86,11 @@ public class RobotContainer {
 
    //connecter les boutons aux commandes ici
    antiHoraire.whenPressed(new AntiHoraireCommand(m_mecanisme2));
+
+   new JoystickButton(m_pilot,1).whenPressed(new RetractionCommand(m_mecanisme2));
+   new JoystickButton(m_pilot,2).whenPressed(new ExtensionCommand(m_mecanisme2));
+   new JoystickButton(m_pilot,3).whenPressed(new RetractionCommand2(m_mecanisme2));
+   new JoystickButton(m_pilot,4).whenPressed(new ExtensionCommand2(m_mecanisme2));
 
   }
 

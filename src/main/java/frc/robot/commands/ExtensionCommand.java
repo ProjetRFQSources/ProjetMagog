@@ -33,7 +33,7 @@ public class ExtensionCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_mecanisme.etend();
+    m_mecanisme.etend1();
   }
 
   // Called once the command ends or is interrupted.

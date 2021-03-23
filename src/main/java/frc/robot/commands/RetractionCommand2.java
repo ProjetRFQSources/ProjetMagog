@@ -8,7 +8,7 @@ import frc.robot.subsystems.Mecanisme2;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class RetractionCommand extends CommandBase {
+public class RetractionCommand2 extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Mecanisme2 m_mecanisme;
   
@@ -18,7 +18,7 @@ public class RetractionCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RetractionCommand(Mecanisme2 mecanisme2) {
+  public RetractionCommand2(Mecanisme2 mecanisme2) {
     m_mecanisme = mecanisme2;
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,7 +34,7 @@ public class RetractionCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_mecanisme.retracte1();
+    m_mecanisme.retracte2();
   }
 
   // Called once the command ends or is interrupted.

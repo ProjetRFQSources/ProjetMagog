@@ -57,8 +57,8 @@ public final class Constants {
 
         //numero des ports dans lesquels vous branchez vos 
         //verins dans le module PCM
-        public static final int kForward = 0;
-        public static final int kReverse  = 1;
+        public static final int kForward = 4;
+        public static final int kReverse  = 3;
     }
 
     public static final class IOConstants{

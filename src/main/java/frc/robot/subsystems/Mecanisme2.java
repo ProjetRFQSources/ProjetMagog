@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Mecanisme2Constants;
@@ -20,13 +21,15 @@ public class Mecanisme2 extends SubsystemBase {
   // Definition et declaration du moteur supplementaire et du verin
   private final VictorSPX m_moteurSupplementaire = new VictorSPX(Mecanisme2Constants.kmoteurSupplementaire);
 
-  private final DoubleSolenoid m_Verin = new DoubleSolenoid(PneumatiqueConstants.kForward,
-      PneumatiqueConstants.kReverse);
+  private final Solenoid m_Verin1 = new Solenoid(0,PneumatiqueConstants.kForward);
+
+  private final Solenoid m_Verin2 = new Solenoid(0,PneumatiqueConstants.kReverse);
 
   // Creation d'un objet Mecanisme2
   public Mecanisme2() {
     super();
-    addChild("Verin", m_Verin);
+    addChild("Verin", m_Verin1);
+    addChild("Verin", m_Verin2);
   }
 
   @Override
@@ -58,15 +61,29 @@ public class Mecanisme2 extends SubsystemBase {
   /**
    * Extension du verin
    */
-  public void etend() {
-    m_Verin.set(Value.kForward);
+  public void etend1() {
+    m_Verin1.set(true);
+  }
+/**
+   * retraction du verin
+   */
+  public void retracte1() {
+    m_Verin1.set(false);
+  }
+  /**
+   * Extension du verin
+   */
+  public void etend2() {
+    m_Verin2.set(false);
   }
 
   /**
    * retraction du verin
    */
-  public void retracte() {
-    m_Verin.set(Value.kReverse);
+  public void retracte2() {
+    m_Verin2.set(true);
+    
   }
+
 
 }

@@ -35,7 +35,7 @@ public class Drivetrain extends SubsystemBase  {
    
   private final SpeedController m_leftMotor = new CANVenom(DriveConstants.kleftport); 
   private final SpeedController m_rightMotor = new CANVenom(DriveConstants.krightport);
-  private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  //private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_leftMotor, m_rightMotor);
   
 
  /**
@@ -82,7 +82,7 @@ public class Drivetrain extends SubsystemBase  {
     super();
 
     // Pour affichage sur LiveWindow
-    addChild("BasePilotable", m_drivetrain);
+    ///addChild("BasePilotable", m_drivetrain);
   }
 
   @Override
@@ -95,8 +95,20 @@ public class Drivetrain extends SubsystemBase  {
    * @param pavanceRecule pour avancer ou reculer [-1,1]
    * @param ptourne       pour tourner gauche ou droire [-1,1]
    */
-  public void arcadeDrive(double pavanceRecule, double ptourne){
-    m_drivetrain.arcadeDrive(pavanceRecule, ptourne);
+  public void arcadeDrive(double speed, double rotation){
+
+    if(Math.abs(speed) <= 0.1){
+      speed = 0.0;
+    }
+    if(Math.abs(rotation)<= 0.1){
+      rotation = 0.0;
+    }
+      double left = speed+rotation;
+      double right = speed-rotation;
+      m_leftMotor.set(-left);
+      m_rightMotor.set(-right); 
+
+    //m_drivetrain.arcadeDrive(speed, rotation);
   }
 
 }
