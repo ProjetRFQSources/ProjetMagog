@@ -16,11 +16,16 @@ import frc.robot.Constants.IOConstants;
 import frc.robot.Constants.PneumatiqueConstants;
 import frc.robot.commands.AntiHoraireCommand;
 import frc.robot.commands.ArcadeDriveCommand;
+import frc.robot.commands.AutoDriveCommand;
+import frc.robot.commands.AutoGroupCommand;
+import frc.robot.commands.AutoRotationCommand;
+//import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ExtensionCommand;
 import frc.robot.commands.ExtensionCommand2;
 import frc.robot.commands.Meca2ReposCommand;
 import frc.robot.commands.RetractionCommand;
 import frc.robot.commands.RetractionCommand2;
+import frc.robot.commands.SensHoraireCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Mecanisme2;
 
@@ -68,7 +73,7 @@ public class RobotContainer {
    //Definition des commandes par default de chaque sous-systeme
   private void setDefaultCommands() {
     m_drivetrain.setDefaultCommand(new ArcadeDriveCommand(
-      ()->m_pilot.getRawAxis(1), ()->m_pilot.getRawAxis(5), m_drivetrain)
+      ()->m_pilot.getRawAxis(1), ()->m_pilot.getRawAxis(4), m_drivetrain)
       );
     m_mecanisme2.setDefaultCommand(new Meca2ReposCommand(m_mecanisme2));
 
@@ -82,16 +87,17 @@ public class RobotContainer {
   // Correspondance entre les boutons de la manette et les commandes
   private void configureButtonBindings() {
     //Generer les boutons ici
-    final JoystickButton antiHoraire = new JoystickButton(m_pilot, 1);
+    //final JoystickButton antiHoraire = new JoystickButton(m_pilot, 1);
 
 
    //connecter les boutons aux commandes ici
-   antiHoraire.whenPressed(new AntiHoraireCommand(m_mecanisme2));
+   new JoystickButton(m_pilot, 3).whileHeld(new AntiHoraireCommand(m_mecanisme2));
+   new JoystickButton(m_pilot, 4).whileHeld(new SensHoraireCommand(m_mecanisme2));
 
-   new JoystickButton(m_pilot,1).whenPressed(new RetractionCommand(m_mecanisme2));
-   new JoystickButton(m_pilot,2).whenPressed(new ExtensionCommand(m_mecanisme2));
-   new JoystickButton(m_pilot,3).whenPressed(new RetractionCommand2(m_mecanisme2));
-   new JoystickButton(m_pilot,4).whenPressed(new ExtensionCommand2(m_mecanisme2));
+   new JoystickButton(m_pilot,1).whenPressed(new ExtensionCommand(m_mecanisme2));
+   new JoystickButton(m_pilot,2).whenPressed(new RetractionCommand(m_mecanisme2));
+   //new JoystickButton(m_pilot,3).whenPressed(new RetractionCommand2(m_mecanisme2));
+   //new JoystickButton(m_pilot,4).whenPressed(new ExtensionCommand2(m_mecanisme2));
 
   }
 
@@ -102,7 +108,11 @@ public class RobotContainer {
    */
  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    //return new AutoCommand(m_drivetrain, m_mecanisme2).andThen(new SensHoraireCommand(m_mecanisme2).withTimeout(1));
+    return new AutoGroupCommand(m_drivetrain, m_mecanisme2);
+    //addSequential(new AutoDriveCommand(2, 0.5, 0, m_drivetrain));
+    //addSequential(new AutoRotationCommand(2, -0.7, m_mecanisme2));
+    //return new AutoRotationCommand(2, -0.7, m_mecanisme2).withTimeout(2).andThen(new AutoDriveCommand(2, -0.5, 0, m_drivetrain));
     
   }
 }

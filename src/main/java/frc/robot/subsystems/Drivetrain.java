@@ -35,7 +35,7 @@ public class Drivetrain extends SubsystemBase  {
    
   private final SpeedController m_leftMotor = new CANVenom(DriveConstants.kleftport); 
   private final SpeedController m_rightMotor = new CANVenom(DriveConstants.krightport);
-  //private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  private final DifferentialDrive m_drivetrain = new DifferentialDrive(m_leftMotor, m_rightMotor);
   
 
  /**
@@ -103,12 +103,11 @@ public class Drivetrain extends SubsystemBase  {
     if(Math.abs(rotation)<= 0.1){
       rotation = 0.0;
     }
-      double left = speed+rotation;
-      double right = speed-rotation;
-      m_leftMotor.set(-left);
-      m_rightMotor.set(-right); 
-
-    //m_drivetrain.arcadeDrive(speed, rotation);
+      //double left = 0.75*(speed+rotation);
+      //double right = 0.75*(speed-rotation);
+      //m_leftMotor.set(-left);
+      //m_rightMotor.set(-right); 
+    m_drivetrain.arcadeDrive(0.6*speed, (-0.6)*rotation);
   }
 
 }

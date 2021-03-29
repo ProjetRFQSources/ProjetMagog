@@ -34,7 +34,8 @@ public class RetractionCommand2 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_mecanisme.retracte2();
+    //m_mecanisme.retracte2();
+    m_mecanisme.retracte1(); //for Gamma
   }
 
   // Called once the command ends or is interrupted.
