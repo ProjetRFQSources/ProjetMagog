@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -22,7 +23,7 @@ public class Mecanisme2 extends SubsystemBase {
 
   // Definition et declaration du moteur supplementaire et du verin
   //private final VictorSPX m_moteurSupplementaire = new VictorSPX(Mecanisme2Constants.kmoteurSupplementaire);
-  private final PWM m_moteurSupplementaire = new PWM(0);
+  private final PWMVictorSPX m_moteurSupplementaire = new PWMVictorSPX(0);
 
   private final Solenoid m_Verin1 = new Solenoid(0,PneumatiqueConstants.kForward);
 
@@ -46,7 +47,7 @@ public class Mecanisme2 extends SubsystemBase {
   // pour savoir determiner le sens
   public void tourneSensHoraire() {
     //m_moteurSupplementaire.set(ControlMode.PercentOutput, Mecanisme2Constants.kvitesseRotation);
-    m_moteurSupplementaire.setSpeed(0.7);
+    m_moteurSupplementaire.setSpeed(1);
   }
   // Faire tourner le moteur sens anti-horaire
   // Remarque: le sens de rotation depend du cablage de votre
@@ -54,7 +55,7 @@ public class Mecanisme2 extends SubsystemBase {
   // pour savoir determiner le sens
   public void tourneSensAntiHoraire() {
     //m_moteurSupplementaire.set(ControlMode.PercentOutput, -Mecanisme2Constants.kvitesseRotation);
-    m_moteurSupplementaire.setSpeed(-0.7);
+    m_moteurSupplementaire.setSpeed(-1);
   }
 
   // Faire tourner le moteur sens anti-horaire

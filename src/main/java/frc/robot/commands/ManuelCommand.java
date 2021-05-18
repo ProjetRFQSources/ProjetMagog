@@ -8,19 +8,19 @@ import frc.robot.subsystems.Mecanisme2;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class AntiHoraireCommand extends CommandBase {
+public class ManuelCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Mecanisme2 m_mecanisme;
-  ///private final double m_speed;
+  private final double m_speed;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AntiHoraireCommand(Mecanisme2 mecanisme) {
+  public ManuelCommand(double speed, Mecanisme2 mecanisme) {
     m_mecanisme = mecanisme;
-    ///m_speed = speed;
+    m_speed = speed;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_mecanisme);
@@ -35,7 +35,7 @@ public class AntiHoraireCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_mecanisme.tourneSensAntiHoraire();
+    m_mecanisme.tourneAnySens(m_speed);
   }
 
   // Called once the command ends or is interrupted.

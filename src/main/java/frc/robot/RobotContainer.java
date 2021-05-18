@@ -22,6 +22,7 @@ import frc.robot.commands.AutoRotationCommand;
 //import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ExtensionCommand;
 import frc.robot.commands.ExtensionCommand2;
+import frc.robot.commands.ManuelCommand;
 import frc.robot.commands.Meca2ReposCommand;
 import frc.robot.commands.RetractionCommand;
 import frc.robot.commands.RetractionCommand2;
@@ -75,7 +76,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(new ArcadeDriveCommand(
       ()->m_pilot.getRawAxis(1), ()->m_pilot.getRawAxis(4), m_drivetrain)
       );
-    m_mecanisme2.setDefaultCommand(new Meca2ReposCommand(m_mecanisme2));
+    m_mecanisme2.setDefaultCommand(new ManuelCommand(m_pilot.getRawAxis(5), m_mecanisme2));
 
     // Configure de la correspondance entre les boutons et les commandes
     configureButtonBindings();
